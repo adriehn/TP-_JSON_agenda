@@ -7,16 +7,16 @@ import java.util.Scanner;
 public class vista {
 
     Scanner scanner = new Scanner(System.in);
-
+    Agenda agenda = new Agenda();
 
     public void ampliarAgenda() {
-        Agenda.guardarContacto();
+        agenda.guardarContacto(this);
     }
 
     public String pedirNombre() {
         System.out.println("Ingrese el nombre");
         String nombre = scanner.nextLine();
-        if (!Agenda.trycatch(nombre)) {
+        if (!agenda.trycatch(nombre)) {
             System.out.println("Reintente ingresar el dato.");
             nombre = pedirNombre();
         }
@@ -26,7 +26,7 @@ public class vista {
     public String pedirEmail() {
         System.out.println("Ingrese el email");
         String email = scanner.nextLine();
-        if (!Agenda.trycatch(email)) {
+        if (!agenda.trycatch(email)) {
             System.out.println("Reintente ingresar el dato.");
             email = pedirEmail();
         }
@@ -36,22 +36,34 @@ public class vista {
     public String pedirTelefono() {
         System.out.println("Ingrese el telefono");
         String telefono = scanner.nextLine();
-        if (!Agenda.trycatch(telefono)) {
+        if (!agenda.trycatch(telefono)) {
             System.out.println("Reintente ingresar el dato.");
             telefono = pedirTelefono();
         }
         return telefono;
     }
 
-
-    public void mostrarAgenda() {
-        Agenda.listarContactos();
+    public void loadAgenda ()
+    {
+        agenda.cargarContactosPublico();
     }
 
-
+    public void saveAgenda()
+    {
+        agenda.guardarAgendaPublico();
+    }
+    public void mostrarAgenda() {
+        agenda.listarContactos();
+    }
+    public static void mostrarMenu() {
+        System.out.println("Seleccione una opción:");
+        System.out.println("1. Agendar contacto");
+        System.out.println("2. Ver contactos");
+        System.out.println("3. Salir");
+        System.out.print("Opción: ");
+    }
     public String cargarOtro() {
         System.out.println("Desea crear otro ? s/n");
         return scanner.nextLine();
     }
-
 }
